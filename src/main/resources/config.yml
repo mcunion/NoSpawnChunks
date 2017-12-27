@@ -25,3 +25,7 @@ garbageCollector:
 # Whether or not to keep world spawns in memory
 # input - boolean
 keepSpawnInMemory: false
+
+# Show log messages
+log:
+  enabled: true

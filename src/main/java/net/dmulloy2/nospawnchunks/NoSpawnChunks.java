@@ -1,17 +1,17 @@
 /**
  * NoSpawnChunks - a Bukkit plugin
  * Copyright (C) - 2014 dmulloy2
- *
+ * <p>
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- *
+ * <p>
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -43,6 +43,7 @@ public class NoSpawnChunks extends JavaPlugin
 
 	private @Getter boolean keepSpawnInMemory;
 	private @Getter boolean autoEnabled;
+    private @Getter boolean logEnabled;
 	private @Getter boolean allWorlds;
 	private @Getter int interval;
 
@@ -105,7 +106,7 @@ public class NoSpawnChunks extends JavaPlugin
 
 	public final void log(String string, Object... objects)
 	{
-		log(Level.INFO, string, objects);
+		if (logEnabled) log(Level.INFO, string, objects);
 	}
 
 	// ---- Load and Reload
@@ -123,6 +124,7 @@ public class NoSpawnChunks extends JavaPlugin
 			worlds.add(world.toLowerCase());
 
 		autoEnabled = getConfig().getBoolean("task.enabled");
+        logEnabled = getConfig().getBoolean("log.enabled", false);
 		allWorlds = worlds.isEmpty() || worlds.contains("*");
 		interval = getConfig().getInt("task.interval", 15) * 60 * 20;
 		keepSpawnInMemory = getConfig().getBoolean("keepSpawnInMemory", false);
